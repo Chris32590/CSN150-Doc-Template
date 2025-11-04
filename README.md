@@ -13,24 +13,39 @@ Set up ESP32 and Arduino enviornment. Execute sketch " Wifiscanner".
 
 ## Links to documentation
 
-##### Video 1: 
+##### Video 1: https://youtu.be/pRa3cijuuik
 
-##### Other Links: 
+##### Other Links: https://youtu.be/CruPE6q51u0
 
 
 ## Steps I followed
-1. Write the steps you followed here.  This way you can keep track of where you might have messed up if the project does not work. 
+1. Installed Arduino IDE from the official site.  
+2. Added ESP32 board manager URL in Preferences.  
+3. Installed “ESP32 by Espressif Systems” via Boards Manager.  
+4. Connected ESP32-CAM using a USB-to-Serial adapter.  
+5. Selected “AI Thinker ESP32-CAM” as the board and correct COM port.  
+6. Opened and uploaded the “WiFiScanner” sketch.  
+7. Opened Serial Monitor to confirm WiFi networks were detected.  
 
 ## Problems
-Note your problems or errors here.  Google any error you may come across, and not what you tried (even if it does not work), and what was the final answer. Document your errors and solutions that worked for you.  
+Problem 1 — Port not showing / “No matching device found”
+Symptom: Arduino IDE shows no COM port, or upload fails with ERROR: no device found.
+What I tried: Replugged cable, tried different USB ports, checked Device Manager, rebooted PC
 
-1. E (485) camera: Camera probe failed with error 0x105(ESP_ERR_NOT_FOUND)
-Camera init failed with error 0x105
- How did I solve: 
+Problem 2 — Camera init failed (error 0x105)
+Symptom: Serial monitor shows Camera probe failed with error 0x105.
+Root cause: Loose camera ribbon cable or wrong camera model in code.
+Solution: Reseated the camera ribbon cable and selected the correct camera model in the sketch.
 
-### Example Problem
-1. Arduino code will not load on ESP32 Cam.
-   Answer: Camera drivers were incorrect I needed to install the driver: [https://www.wch-ic.com/downloads/CH341SER_ZIP.html](https://github.com/martin-ger/esp32_nat_router).  I used file, "CH341SER.ZIP" and it worked.
+Problem 3 — Insufficient power / module resets during WiFi scan
+
+Symptom: ESP32 resets during scan or camera streaming, or WiFi fails to connect.
+What I tried: Used laptop USB, tried different ports.
+Root cause: ESP32-CAM can draw high current (especially when camera + WiFi active). Many USB ports cannot supply steady 5V/500–900mA spikes.
+How I solved: Used a dedicated 5V power supply or powered via a stable 5V regulator instead of directly from weak USB port. Problem resolved.
+
 
 
 ## Final Report
+In the end, I successfully set up the ESP32 environment and ran the WiFiScanner sketch. I learned how to install board packages, troubleshoot serial connections, and solve power-related issues. This project helped me understand how embedded devices connect to wireless networks and how small setup mistakes (like weak power or wrong wiring) can affect performance.
+
